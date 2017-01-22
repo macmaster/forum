@@ -1,7 +1,7 @@
 <?php
 	include "connect.php";
 	include "header.php";
-	echo '<img src="img/bobba.png"/><br>';
+	echo '<img id="bobba" src="img/bobba.png"/><br>';
 	
 	$sql = "SELECT
 				cat_id, cat_name, cat_description
