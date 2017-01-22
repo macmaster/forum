@@ -1,7 +1,7 @@
 <?php
 $server =  "localhost";
 $username = "ronny";
-$password = "Macmaster17";
+$password = "3mjnNs79GGSf9w7s";
 $database = "forum";
 
 // connect to the database
