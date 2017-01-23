@@ -7,7 +7,7 @@
 		WHERE cat_id = " . mysql_escape_string($_GET["id"]) . ";";
 	$result = mysql_query($sql);
 	
-	if(!result){
+	if(!$result){
 		// category fetch error
 		echo "The category could not be displayed. Please try again later.";
 		echo mysql_error();

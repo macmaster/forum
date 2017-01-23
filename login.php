@@ -82,7 +82,7 @@
 						$_SESSION['user_name'] = $user['user_name'];
 						$_SESSION['user_level'] = $user['user_level'];
 						echo "Welcome " . $_SESSION['user_name'] . "!<br> Proceed to the <a href=index.php>forum.</a>";
-						echo "<script>setTimeout(\"location.href = 'index.php';\", 5 * 1000);</script>"; // javascript redirect 3s
+						echo "<script>setTimeout(\"location.href = 'index.php';\", 2 * 1000);</script>"; // javascript redirect 3s
 					}
 				}
 			}

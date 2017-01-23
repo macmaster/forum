@@ -43,6 +43,7 @@
 						echo '<tr><td>';
 						echo '<h3>' . $row['user_name'] . '</h3>';
 						echo date("m/d/Y", strtotime($row['post_date']));
+						echo "<br>" . date("H:i:s", strtotime($row['post_date']));
 						echo '</td><td>';
 						echo '<p>' . $row['post_content'] . '</p>';
 						echo "</td></tr>";
