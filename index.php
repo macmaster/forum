@@ -3,10 +3,7 @@
 	include "header.php";
 	echo '<img id="bobba" src="img/bobba.png"/><br>';
 	
-	$sql = "SELECT
-				cat_id, cat_name, cat_description
-			FROM
-				categories";
+	$sql = "SELECT cat_id, cat_name, cat_description FROM categories";
 				
 	// execute query			
 	$result = mysql_query($sql);
