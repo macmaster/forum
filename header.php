@@ -12,14 +12,14 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 <body>
-	<h1>Welcome to the Macmaster Family Forum</h1>
+	<h1>Welcome to the Skull Forum</h1>
 	<div id="wrapper">
 	<div id="menu">
-		<a class="item" href="/forum/index.php">Home</a>
-		<a class="item" href="/forum/create_topic.php">Create a topic</a>
+		<a class="item" href="index.php">Home</a>
+		<a class="item" href="create_topic.php">Create a topic</a>
 		<?php // only admins can create categories
 			if(isset($_SESSION['user_level']) && $_SESSION['user_level'] == 1){
-				echo '<a class="item" href="/forum/create_category.php">Create a category</a>';
+				echo '<a class="item" href="create_category.php">Create a category</a>';
 			}
 		?>
 		
@@ -27,10 +27,10 @@
 			<?php
 				if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true){
 					echo "Hello " . $_SESSION['user_name'] . ". Not you? "; 
-					echo '<a class="item" href="/forum/logout.php">Log out</a>';
+					echo '<a class="item" href="logout.php">Log out</a>';
 				} else{ // user not signed in.
-					echo '<a class="item" href="/forum/login.php">Sign In</a>';
-					echo ' or <a class="item" href="/forum/register.php">Create an Account</a>';
+					echo '<a class="item" href="login.php">Sign In</a>';
+					echo ' or <a class="item" href="register.php">Create an Account</a>';
 				}
 			?>
 		</div>

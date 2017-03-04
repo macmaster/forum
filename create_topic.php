@@ -33,7 +33,7 @@
 	
 	// Check if user is signed in
 	if(!isset($_SESSION['signed_in']) || $_SESSION['signed_in'] == false){
-		echo 'You must be <a href="/forum/login.php">signed in</a> to create a toppic. <br>';
+		echo 'You must be <a href="login.php">signed in</a> to create a toppic. <br>';
 		echo 'Return to the <a href=index.php>homepage.</a>';
 		echo "<script>setTimeout(\"location.href = 'index.php';\", 3 * 1000);</script>"; // javascript redirect 3s
 	} else{
