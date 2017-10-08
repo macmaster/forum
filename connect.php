@@ -5,9 +5,8 @@ $password = "Macmaster17";
 $database = "forum";
 
 // connect to the database
-if(!mysql_connect($server, $username, $password)){
-	exit("Error: could not establish database connection.");
-} else if(!mysql_select_db($database)){
-	exit("Error: could not select the database.");
-}
+$mysqli = new mysqli($server, $username, $password, $database);
+if ($mysqli->connect_error) {
+	exit("MYSQL Error ($mysqli->connect_errno): $mysqli->connect_error");
+} 
 ?>
