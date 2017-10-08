@@ -72,7 +72,7 @@
 				$_SESSION['user_id'] = $user['user_id'];
 				$_SESSION['user_name'] = $user['user_name'];
 				$_SESSION['user_level'] = $user['user_level'];
-				echo "<script>setTimeout(\"location.href = 'index.php';\", 0 * 1000);</script>"; // javascript redirect 2s
+				echo "<script>setTimeout(\"location.href = '/';\", 0 * 1000);</script>"; // javascript redirect 2s
 			}
 		}
 	}

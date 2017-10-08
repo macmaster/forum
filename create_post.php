@@ -6,7 +6,7 @@
 	function print_form($topic="",  $message=""){
 		echo '<form method="post" action="">';
 		echo "<h3>Create a Post</h3>";
-		echo '<input type="hidden" name="topic_cat" value="3"><br>';
+		echo '<input type="hidden" name="topic_cat" value="1"><br>';
 		echo 'Post Title: <input type="text" name="topic_subject" value="'.$topic.'"/>';
 		echo 'Message: <br><textarea name="post_content">'.$message.'</textarea>';
 		echo '<input type="submit" value="Create Post"/></form>';
@@ -74,7 +74,7 @@
 						// post was created
 						$mysqli->query("COMMIT;");
 						$topic_url = "topic.php?id=" . $topic_id;
-						echo "Sucessfully created <a href=$topic_url>your new topic.</a><br> Return to the <a href=index.php>forum.</a>";
+						echo "Sucessfully created <a href=$topic_url>your new topic.</a><br> Return to the <a href=/>forum.</a>";
 						echo "<script>setTimeout(\"location.href = '$topic_url';\", 0 * 1000);</script>"; // javascript redirect 0s
 					}
 				}

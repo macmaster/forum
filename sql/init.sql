@@ -5,6 +5,7 @@ CREATE TABLE users (
 	user_email	VARCHAR(255) NOT NULL,
 	user_date	DATETIME NOT NULL,
 	user_level	INT(8) NOT NULL,
+	user_img	 VARCHAR(300) DEFAULT "https://i.ytimg.com/vi/TIwqn2HXvNg/hqdefault.jpg" NOT NULL,
 	UNIQUE INDEX user_name_unique (user_name),
 	PRIMARY KEY (user_id)
 );
@@ -32,6 +33,7 @@ CREATE TABLE posts (
 	post_date		DATETIME NOT NULL,
 	post_topic		INT(8) NOT NULL,
 	post_by 		INT(8) NOT NULL,
+	post_user	 	VARCHAR(30) NOT NULL,
 	PRIMARY KEY (post_id)
 );
 
@@ -50,3 +52,7 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 /* Each post linked to user that made it */
 ALTER TABLE posts ADD FOREIGN KEY (post_by) REFERENCES users(user_id)
 ON DELETE RESTRICT ON UPDATE CASCADE;
+
+/* Default Category */
+INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_description`) 
+VALUES (NULL, 'trash', 'shit talking at its finest...');

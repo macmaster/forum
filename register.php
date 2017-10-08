@@ -45,8 +45,8 @@
 		// check username
 		if (!isset($_POST['user_name']) || !($username = $_POST['user_name'])) {
 			$errors[] = "Username must not be empty!";
-		} else if (!ctype_alnum($username)) {
-			$errors[] = "Username can only contain letters and digits.";
+		// } else if (!ctype_alnum($username)) {
+		// 	$errors[] = "Username can only contain letters and digits.";
 		} else if (strlen($username) > 30) {
 			$errors[] = "Username cannot be longer than 30 characters.";
 		} else if (user_exists($username)) {
@@ -88,7 +88,7 @@
 				echo $mysqli->error;
 			} else {
 				echo "Sucessfully registered. Now you can <a href=login.php>sign in</a> and start posting.";
-				echo "<script>setTimeout(\"location.href = 'index.php';\", 0);</script>"; // javascript redirect 2s
+				echo "<script>setTimeout(\"location.href = '/';\", 0);</script>"; // javascript redirect 2s
 			}
 		}
 	}

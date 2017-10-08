@@ -15,13 +15,14 @@
 	<h1><a href="/" style="color:white;">Knock GQ</a></h1>
 	<div id="wrapper">
 	<div id="menu">
-		<a class="item" href="index.php">Home</a>
+		<a class="item" href="/">Home</a>
 		<a class="item" href="create_post.php">Create Post</a>
 
 		<div id="userbar">
 			<?php
 				if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
-					echo "Hello " . $_SESSION['user_name'] . ". Not you? "; 
+					echo "Hello " . $_SESSION['user_name']; 
+					echo '<a class="item" href="profile.php?id='.$_SESSION['user_id'].'">Profile</a>';
 					echo '<a class="item" href="logout.php">Log out</a>';
 				} else { // user not signed in.
 					echo '<a class="item" href="login.php">Sign In</a>';

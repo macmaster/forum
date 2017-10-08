@@ -1,7 +1,7 @@
 <?php 
 	include "connect.php";
 	include "header.php";
-	
+
 	// fetch the topic information
 	$sql = "SELECT topic_id, topic_subject, topic_date, topic_by FROM topics
 		WHERE topic_id = " . $mysqli->escape_string($_GET["id"]) . ";";
@@ -18,7 +18,7 @@
 		
 		// fetch the topic posts and poster names
 		$sql = "SELECT 
-			users.user_id, users.user_name, 
+			users.user_id, users.user_name, users.user_img,  
 			posts.post_id, posts.post_content, posts.post_date, posts.post_by
 			FROM users LEFT JOIN posts ON posts.post_by = users.user_id
 			WHERE posts.post_topic = " . $mysqli->escape_string($_GET["id"]) . ";";
@@ -34,9 +34,18 @@
 			echo "<table class='post_table' border=1>
 				<tr><th>By:</th><th>Content</th></tr>";
 			
+			$anonymous = true;	
 			while ($row = $result->fetch_assoc()) {
 				echo '<tr><td>';
-				echo '<h3>' . $row['user_name'] . '</h3>';
+				if ($anonymous) { 
+					// first post is anonymous
+					$anonymous = false;
+				} else {
+					$profile_url = "profile.php?id=" . $row['user_id'];
+					echo "<a href=".$profile_url.">";
+					echo '<img style="float:right;width:90px;height:90px" src="'.$row['user_img'].'"></a>';
+					echo "<h3><a href=".$profile_url.">".$row['user_name']."</a></h3>";
+				}
 				echo date("m/d/Y", strtotime($row['post_date']));
 				echo "<br>" . date("H:i:s", strtotime($row['post_date']));
 				echo '</td><td>';

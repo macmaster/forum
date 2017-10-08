@@ -8,7 +8,7 @@
 
 	$sql = "SELECT users.user_name, topics.topic_id, topics.topic_subject FROM topics
 			INNER JOIN users ON users.user_id = topics.topic_by
-			ORDER BY topics.topic_date DESC;";
+			ORDER BY topics.topic_id DESC;";
 
 	// fetch topics from db
 	if (!($result = $mysqli->query($sql))) {
@@ -27,10 +27,10 @@
 			echo '<tr>';
 			echo '<td class="leftpart">';
 			echo '<h3><a href="topic.php?id=' . $topic['topic_id'] . '">';
-			echo $topic['topic_subject'] . '</a></h3>posted by '.$topic['user_name'].'</td>';
+			echo $topic['topic_subject'] . '</a></h3>posted by [anonymous]</td>';
 			
 			// last topic
-			$sql = "SELECT topics.topic_id, topics.topic_subject, posts.post_date, posts.post_content FROM topics 
+			$sql = "SELECT topics.topic_id, topics.topic_subject, posts.post_user, posts.post_date, posts.post_content FROM topics 
 				INNER JOIN posts ON topics.topic_id = posts.post_topic
 				WHERE topics.topic_id = ". $topic['topic_id'] . "
 				ORDER BY posts.post_date DESC;";
@@ -45,7 +45,7 @@
 				$post = $posts->fetch_assoc();
 				echo '<td class="rightpart">';
 				echo '<p>'.$post['post_content'].'</p>'; 
-				echo 'posted at '.$post['post_date'].'</td>';
+				echo 'posted by '.$post['post_user'].'  at '.$post['post_date'].'</td>';
 				echo '</tr>';
 			}
 		}
