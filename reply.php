@@ -10,7 +10,7 @@
 			echo 'You must be <a href="login.php">signed in</a> to post a reply. <br>';
 			echo 'Return to the <a href=index.php>homepage.</a>';
 			echo "<script>setTimeout(\"location.href = 'index.php';\", 3 * 1000);</script>"; // javascript redirect 3s
-	} else {
+	} else if ($_POST['reply-content']) {
 		// create reply post
 		$insert = "INSERT INTO 
 			posts(post_content, post_date, post_topic, post_by) 
@@ -30,6 +30,8 @@
 			echo 'Check it out <a href="topic.php?id=' . $mysqli->escape_string($_GET['id']) . '">here.</a>';
 			echo "<script>setTimeout(\"location.href = 'topic.php?id=" . $mysqli->escape_string($_GET['id']) . "';\", 0);</script>";
 		}
+	} else {
+		echo "<script>setTimeout(\"location.href = 'topic.php?id=" . $mysqli->escape_string($_GET['id']) . "';\", 0);</script>";
 	}
 	
 	// page footer

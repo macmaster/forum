@@ -14,7 +14,7 @@
 			echo "The topic does not exist!";
 	} else {
 		$row = $result->fetch_assoc();
-		echo "<h2><p>Posts for: " . $row['topic_subject'] . "</p></h2>";
+		echo "<h2><p>Comments for: " . $row['topic_subject'] . "</p></h2>";
 		
 		// fetch the topic posts and poster names
 		$sql = "SELECT 
@@ -31,7 +31,7 @@
 			echo "There are no posts under this topic yet.";
 		} else {
 			// prepare the table
-			echo "<table border=1>
+			echo "<table class='post_table' border=1>
 				<tr><th>By:</th><th>Content</th></tr>";
 			
 			while ($row = $result->fetch_assoc()) {
@@ -45,12 +45,16 @@
 			}
 			echo "</table>"; // close the table
 			
-			// reply form
-			echo '<form method="post" action="reply.php?id=' . $mysqli->escape_string($_GET["id"]) . '">';
-			echo '<h3>Reply:</h3>';
-			echo '<textarea name="reply-content"></textarea>';
-			echo '<input type="submit" value="Submit reply" />';
-			echo '</form>';
+			if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+				// reply form
+				echo '<div class="center-frame"><form method="post" action="reply.php?id=' . $mysqli->escape_string($_GET["id"]) . '">';
+				echo '<h3>Reply:</h3>';
+				echo '<textarea name="reply-content"></textarea>';
+				echo '<input type="submit" value="Submit reply" />';
+				echo '</form></div>';
+			} else {
+				echo "<h2>You are not <a href='login.php'>signed in!</a></h2>";
+			}				
 		}
 	}
 	

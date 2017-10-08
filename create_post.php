@@ -4,35 +4,17 @@
 
 	// topic form
 	function print_form($topic="",  $message=""){
-		// retrieve category data
-		$sql = "SELECT cat_id, cat_name, cat_description FROM categories";
-
-		global $mysqli;
-		if (!($result = $mysqli->query($sql))) {
-			// something went wrong with the database
-			echo "Something went wrong while fetching the category data. Please try again later...";
-			echo $mysqli->error;
-		} else if ($result->num_rows == 0) {
-			echo "There are no categories yet. Please wait for an admin to create some.";
-		} else {
-			echo '<form method="post" action="">';
-			echo "<h3>Create a Topic</h3>";
-			echo 'Category: <select name="topic_cat">';
-				while($row = $result->fetch_assoc()){
-					echo '<option value="' . $row["cat_id"] . '">' . $row["cat_name"] . '</option>';
-				}
-			echo '</select> <br>';
-			echo 'Topic Subject: <input type="text" name="topic_subject" value="'.$topic.'"/>';
-			echo 'Message: <br><textarea name="post_content">'.$message.'</textarea>';
-			echo '<input type="submit" value="Create Topic"/></form>';
-		}
+		echo '<form method="post" action="">';
+		echo "<h3>Create a Post</h3>";
+		echo '<input type="hidden" name="topic_cat" value="3"><br>';
+		echo 'Post Title: <input type="text" name="topic_subject" value="'.$topic.'"/>';
+		echo 'Message: <br><textarea name="post_content">'.$message.'</textarea>';
+		echo '<input type="submit" value="Create Post"/></form>';
 	}
 	
 	// Check if user is signed in
 	if (!isset($_SESSION['signed_in']) || $_SESSION['signed_in'] == false) {
-		echo 'You must be <a href="login.php">signed in</a> to create a toppic. <br>';
-		echo 'Return to the <a href=index.php>homepage.</a>';
-		echo "<script>setTimeout(\"location.href = 'index.php';\", 3 * 1000);</script>"; // javascript redirect 3s
+		echo "<script>setTimeout(\"location.href = 'login.php';\", 0 * 1000);</script>"; 
 	} else if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		print_form(); // Form hasn't been posted yet. display it.
 	} else { 

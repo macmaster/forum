@@ -8,20 +8,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="Description" content="My first internet forum." />
 	<meta name="keywords" content="forum, ronny, macmaster" />
-	<title>Macmaster forum</title>
+	<title>Knock GQ</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 <body>
-	<h1>Welcome to the Skull Forum</h1>
+	<h1><a href="/" style="color:white;">Knock GQ</a></h1>
 	<div id="wrapper">
 	<div id="menu">
 		<a class="item" href="index.php">Home</a>
-		<a class="item" href="create_topic.php">Create a topic</a>
-		<?php // only admins can create categories
-			if (isset($_SESSION['user_level']) && $_SESSION['user_level'] == 1) {
-				echo '<a class="item" href="create_category.php">Create a category</a>';
-			}
-		?>
+		<a class="item" href="create_post.php">Create Post</a>
 
 		<div id="userbar">
 			<?php
@@ -37,5 +32,5 @@
 	</div>
 	<div id="content">
 
-	<h2>Our first ever web forum...</h2>
+	<h2>The Worst Place on the Internet</h2>
 

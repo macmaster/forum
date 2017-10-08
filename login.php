@@ -5,12 +5,16 @@
 	// registration form
 	function print_form($username="", $password="") {
 		echo '
-			<form method="post" action="">
-			<h3>Sign in</h3>
+			<div class="center-frame">
+			<h3>Login</h3>
+			<form id="reg_form" method="post" action="">
 				Username: <input type="text" name="user_name" value="'.$username.'"/><br>
 				Password: <input type="password" name="user_pass" value="'.$password.'"/><br>
-				<input type="submit" value="Login">
-			</form>';
+			<div class="button-group">
+				<button>Login</button>
+				<button type="button" onclick="window.location=\'register.php\';">Create Account</button>
+			</div>	
+			</form></div>';
 	}
 	
 	// Check if user is already signed in...

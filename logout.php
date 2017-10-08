@@ -14,7 +14,7 @@
 		unset($_SESSION['user_level']);
 		echo 'You are now signed out. <br>';
 		echo 'Return to the <a href=index.php>homepage.</a>';
-		echo "<script>setTimeout(\"location.href = 'index.php';\", 3 * 1000);</script>"; // javascript redirect 3s
+		echo "<script>setTimeout(\"location.href = 'index.php';\", 0);</script>"; // javascript redirect 3s
 	}
 	
 	// page footer

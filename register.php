@@ -5,14 +5,15 @@
 	// registration form
 	function print_form($username="", $password="", $email="") {
 		echo '
-			<form method="post" action="">
+			<div class="center-frame">
 			<h3>Registration</h3>
+			<form method="post" action="">
 				Username: <input type="text" name="user_name" value="'.$username.'"/><br>
 				Password: <input type="password" name="user_pass" value="'.$password.'"/><br>
 				Password again: <input type="password" name="user_check_pass" /><br>
 				E-mail (optional): <input type="email" name="user_email" value="'.$email.'"/><br>
 				<input type="submit" value="Register">
-			</form>';
+			</form></div>';
 	}
 	
 	// returns true is username already exists
@@ -87,7 +88,7 @@
 				echo $mysqli->error;
 			} else {
 				echo "Sucessfully registered. Now you can <a href=login.php>sign in</a> and start posting.";
-				echo "<script>setTimeout(\"location.href = 'index.php';\", 2 * 1000);</script>"; // javascript redirect 2s
+				echo "<script>setTimeout(\"location.href = 'index.php';\", 0);</script>"; // javascript redirect 2s
 			}
 		}
 	}
