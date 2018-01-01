@@ -12,10 +12,7 @@
 		echo '<input type="submit" value="Create Post"/></form>';
 	}
 	
-	// Check if user is signed in
-	if (!isset($_SESSION['signed_in']) || $_SESSION['signed_in'] == false) {
-		echo "<script>setTimeout(\"location.href = 'login.php';\", 0 * 1000);</script>"; 
-	} else if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		print_form(); // Form hasn't been posted yet. display it.
 	} else { 
 		// start a transaction
@@ -44,17 +41,25 @@
 				echo "</ul>";
 				print_form($topic, $category);
 			} else { 
+				// Check if user is signed in
+				$user_id = $_SESSION['user_id'];
+				if (!isset($_SESSION['signed_in']) || $_SESSION['signed_in'] == false) {
+				 	// echo "<script>setTimeout(\"location.href = 'login.php';\", 0 * 1000);</script>"; 
+					$user_id = 1;
+				}
+
 				// Save topic subject and message
 				$sql = "INSERT INTO topics(topic_subject, topic_date, topic_cat, topic_by)
 						VALUES('" . $mysqli->real_escape_string($topic) ."', NOW(),
 							'" . $mysqli->real_escape_string($category) ."',
-							'" . $_SESSION['user_id'] . "')";
+							'" . $user_id . "')";
 							
 				// create the topic			
 				if (!($result = $mysqli->query($sql))) {
 					// something wrong with creating the topic
 					echo "Something went wrong while creating your topic. Please try again later...";
 					echo $mysqli->error;
+					echo $sql;
 					$mysqli->query("ROLLBACK;");
 				} else {
 					// topic created. add a post.
@@ -62,7 +67,7 @@
 					
 					$sql = "INSERT INTO posts(post_content, post_date, post_topic, post_by)
 						VALUES('" . $mysqli->real_escape_string($_POST['post_content']) ."', NOW(),
-							'" . $topic_id ."', '" . $_SESSION['user_id'] . "')";
+							'" . $topic_id ."', '" . $user_id . "')";
 							
 					// create the topic post
 					if (!($result = $mysqli->query($sql))) {
@@ -81,6 +86,8 @@
 			}
 		}
 	}
+
+
 	
 	// page footer
 	include "footer.php";
