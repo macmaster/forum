@@ -1,7 +1,7 @@
 <?php 
 	include "connect.php";
 	include "header.php";
-	
+
 	// fetch the topic information
 	$sql = "SELECT topic_id, topic_subject, topic_date, topic_by FROM topics
 		WHERE topic_id = " . $mysqli->escape_string($_GET["id"]) . ";";
@@ -14,11 +14,11 @@
 			echo "The topic does not exist!";
 	} else {
 		$row = $result->fetch_assoc();
-		echo "<h2><p>Posts for: " . $row['topic_subject'] . "</p></h2>";
+		echo "<h2><p>Comments for: " . $row['topic_subject'] . "</p></h2>";
 		
 		// fetch the topic posts and poster names
 		$sql = "SELECT 
-			users.user_id, users.user_name, 
+			users.user_id, users.user_name, users.user_img,  
 			posts.post_id, posts.post_content, posts.post_date, posts.post_by
 			FROM users LEFT JOIN posts ON posts.post_by = users.user_id
 			WHERE posts.post_topic = " . $mysqli->escape_string($_GET["id"]) . ";";
@@ -31,12 +31,21 @@
 			echo "There are no posts under this topic yet.";
 		} else {
 			// prepare the table
-			echo "<table border=1>
+			echo "<table class='post_table' border=1>
 				<tr><th>By:</th><th>Content</th></tr>";
 			
+			$anonymous = true;	
 			while ($row = $result->fetch_assoc()) {
 				echo '<tr><td>';
-				echo '<h3>' . $row['user_name'] . '</h3>';
+				if ($anonymous) { 
+					// first post is anonymous
+					$anonymous = false;
+				} else {
+					$profile_url = "profile.php?id=" . $row['user_id'];
+					echo "<a href=".$profile_url.">";
+					echo '<img style="float:right;width:90px;height:90px" src="'.$row['user_img'].'"></a>';
+					echo "<h3><a href=".$profile_url.">".$row['user_name']."</a></h3>";
+				}
 				echo date("m/d/Y", strtotime($row['post_date']));
 				echo "<br>" . date("H:i:s", strtotime($row['post_date']));
 				echo '</td><td>';
@@ -45,12 +54,16 @@
 			}
 			echo "</table>"; // close the table
 			
-			// reply form
-			echo '<form method="post" action="reply.php?id=' . $mysqli->escape_string($_GET["id"]) . '">';
-			echo '<h3>Reply:</h3>';
-			echo '<textarea name="reply-content"></textarea>';
-			echo '<input type="submit" value="Submit reply" />';
-			echo '</form>';
+			if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
+				// reply form
+				echo '<div class="center-frame"><form method="post" action="reply.php?id=' . $mysqli->escape_string($_GET["id"]) . '">';
+				echo '<h3>Reply:</h3>';
+				echo '<textarea name="reply-content"></textarea>';
+				echo '<input type="submit" value="Submit reply" />';
+				echo '</form></div>';
+			} else {
+				echo "<h2>You are not <a href='login.php'>signed in!</a></h2>";
+			}				
 		}
 	}
 	

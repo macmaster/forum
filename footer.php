@@ -4,6 +4,6 @@
 
 </div> <!-- content -->
 </div> <!-- wrapper -->
-<div id="footer">Created for my buddies.</div>
+<div id="footer">ruining lives since 2017.</div>
 </body>
 </html>
